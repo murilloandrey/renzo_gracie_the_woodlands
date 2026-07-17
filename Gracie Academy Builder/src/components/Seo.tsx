@@ -21,7 +21,7 @@ function setMeta(selector: string, attr: "name" | "property", key: string, conte
   tag.setAttribute("content", content);
 }
 
-export function Seo({ title, description, path = "/", image = "/favicon.ico", noindex = false, structuredData }: SeoProps) {
+export function Seo({ title, description, path = "/", image = "/social-card.png", noindex = false, structuredData }: SeoProps) {
   useEffect(() => {
     const canonicalUrl = `${SITE_URL}${path === "/" ? "" : path}`;
     const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;

@@ -180,7 +180,7 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
-      <Seo title={HOME_TITLE} description={HOME_DESCRIPTION} image={heroBg} structuredData={homeStructuredData} />
+      <Seo title={HOME_TITLE} description={HOME_DESCRIPTION} structuredData={homeStructuredData} />
       {/* HERO */}
       <section className="grain relative min-h-[100svh] overflow-hidden">
         <img

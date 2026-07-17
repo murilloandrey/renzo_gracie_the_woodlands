@@ -21,7 +21,6 @@ function FreeTrial() {
         title="Free Trial Class | Renzo Gracie The Woodlands"
         description="Claim your free first BJJ, Muay Thai, or MMA class at Renzo Gracie The Woodlands. No experience needed."
         path="/free-trial"
-        image={heroBg}
       />
       <section className="grain relative overflow-hidden px-6 pt-16 pb-20 text-center md:pt-24">
         <img
