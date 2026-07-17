@@ -148,6 +148,9 @@ const testimonials = [
   { name: "Anthony", role: "Adult Beginner", quote: "Felt part of the community from day one. Coach Phillipe breaks down the Muay Thai combos so clearly that even a total beginner gets it fast." },
 ];
 
+// Paste the YouTube video ID here to activate the embed.
+const TESTIMONIAL_VIDEO_ID = "";
+
 const faqs = [
   { q: "Do I need any experience to start?", a: "None at all. Most of our students walked in as complete beginners. Our coaches are experts at meeting you exactly where you are — your only job is to show up." },
   { q: "What should I wear to my first class?", a: "T-shirt and shorts or leggings without zippers. No gi needed for your trial — we'll get you sorted." },
@@ -403,17 +406,44 @@ function Home() {
       {/* TESTIMONIALS */}
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
         <SectionHeader eyebrow="06 — Voices from the Mat" title="Five-Star Reputation" />
-        <div className="grid gap-4 md:grid-cols-4">
-          {testimonials.map((t) => (
-            <div key={t.name} className="border border-border bg-card p-6">
-              <Stars />
-              <p className="mt-4 text-sm text-muted-foreground">"{t.quote}"</p>
-              <div className="mt-6 border-t border-border pt-4">
-                <div className="font-display tracking-[0.18em]">{t.name}</div>
-                <div className="text-xs text-muted-foreground">{t.role}</div>
-              </div>
+        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
+          <div>
+            <div className="eyebrow mb-3">Student Testimonial</div>
+            <p className="mb-6 max-w-xl text-sm text-muted-foreground">
+              Don't just take it from us — hear it from Ilena, an active competitor at the academy.
+            </p>
+            <div className="aspect-video overflow-hidden border border-border bg-card">
+              {TESTIMONIAL_VIDEO_ID ? (
+                <iframe
+                  title="Student testimonial from Ilena at Renzo Gracie The Woodlands"
+                  src={`https://www.youtube-nocookie.com/embed/${TESTIMONIAL_VIDEO_ID}`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground">
+                  <div className="rounded-full border border-bone/30 p-4">
+                    <Play size={28} fill="currentColor" />
+                  </div>
+                  <div className="font-display text-xs tracking-[0.18em]">Video Coming Soon</div>
+                </div>
+              )}
             </div>
-          ))}
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            {testimonials.map((t) => (
+              <div key={t.name} className="border border-border bg-card p-6">
+                <Stars />
+                <p className="mt-4 text-sm text-muted-foreground">"{t.quote}"</p>
+                <div className="mt-6 border-t border-border pt-4">
+                  <div className="font-display tracking-[0.18em]">{t.name}</div>
+                  <div className="text-xs text-muted-foreground">{t.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
