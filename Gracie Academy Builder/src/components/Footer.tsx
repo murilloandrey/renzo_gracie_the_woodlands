@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.webp";
 import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
 
+const YOUTUBE_URL = "https://www.youtube.com/@RenzoGracieTheWoodlands";
+
 export function Footer() {
   return (
     <footer className="border-t border-border bg-obsidian px-6 pt-16 pb-8 md:px-12">
@@ -15,7 +17,7 @@ export function Footer() {
           <div className="mt-5 flex gap-4 text-muted-foreground">
             <a href="https://instagram.com/renzo_gracie_the_woodlands" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram size={18} /></a>
             <a href="https://facebook.com/renzograciethewoodlands1" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook size={18} /></a>
-            <a href="#" aria-label="YouTube" className="hover:text-primary transition-colors"><Youtube size={18} /></a>
+            <a href={YOUTUBE_URL} aria-label="YouTube" className="hover:text-primary transition-colors"><Youtube size={18} /></a>
           </div>
         </div>
         <div>

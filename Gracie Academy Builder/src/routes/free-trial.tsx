@@ -4,14 +4,9 @@ import { Check, ChevronRight, ClipboardList, Shirt, Clock, MapPin, Phone, Mail, 
 import logo from "@/assets/logo.webp";
 import heroBg from "@/assets/hero-bg.jpg";
 import { Footer } from "@/components/Footer";
+import { Seo } from "@/components/Seo";
 
 export const Route = createFileRoute("/free-trial")({
-  head: () => ({
-    meta: [
-      { title: "Free Trial Class — Renzo Gracie The Woodlands" },
-      { name: "description", content: "Claim your free first BJJ, Muay Thai or MMA class. No experience needed." },
-    ],
-  }),
   component: FreeTrial,
 });
 
@@ -22,8 +17,21 @@ function FreeTrial() {
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
+      <Seo
+        title="Free Trial Class | Renzo Gracie The Woodlands"
+        description="Claim your free first BJJ, Muay Thai, or MMA class at Renzo Gracie The Woodlands. No experience needed."
+        path="/free-trial"
+        image={heroBg}
+      />
       <section className="grain relative overflow-hidden px-6 pt-16 pb-20 text-center md:pt-24">
-        <img src={heroBg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <img
+          src={heroBg}
+          alt=""
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover opacity-30"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 to-obsidian" />
         <div className="relative mx-auto max-w-2xl">
           <img src={logo} alt="" className="logo-white mx-auto h-14 w-14" />

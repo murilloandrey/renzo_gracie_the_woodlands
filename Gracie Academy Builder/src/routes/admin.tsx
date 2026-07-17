@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import logo from "@/assets/logo.webp";
+import { Seo } from "@/components/Seo";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Staff Admin — Renzo Gracie The Woodlands" }, { name: "robots", content: "noindex" }] }),
   component: Admin,
 });
 
@@ -11,6 +11,12 @@ function Admin() {
   const [pw, setPw] = useState("");
   return (
     <div className="min-h-screen flex items-center justify-center bg-obsidian px-6 text-bone">
+      <Seo
+        title="Staff Admin"
+        description="Staff admin for Renzo Gracie The Woodlands."
+        path="/admin"
+        noindex
+      />
       <form
         onSubmit={(e) => { e.preventDefault(); }}
         className="w-full max-w-sm text-center"

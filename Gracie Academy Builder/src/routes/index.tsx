@@ -17,12 +17,60 @@ import ig3 from "@/assets/ig-3.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
+import { Seo } from "@/components/Seo";
 
 export const Route = createFileRoute("/")({
   component: Home,
 });
 
 const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=9391+Grogans+Mill+Rd+Ste+B12+The+Woodlands+TX";
+const YOUTUBE_URL = "https://www.youtube.com/@RenzoGracieTheWoodlands";
+const HOME_TITLE = "Jiu Jitsu & MMA in The Woodlands TX | Free Trial | Renzo Gracie The Woodlands";
+const HOME_DESCRIPTION =
+  "Train Brazilian Jiu-Jitsu, Muay Thai, MMA, and kids martial arts in The Woodlands, TX. Claim your free trial class at Renzo Gracie The Woodlands.";
+
+const homeStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "SportsActivityLocation"],
+    name: "Renzo Gracie The Woodlands",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "9391 Grogan's Mill Rd Ste B12",
+      addressLocality: "The Woodlands",
+      addressRegion: "TX",
+      addressCountry: "US",
+    },
+    telephone: "+1-832-584-0565",
+    email: "info@renzograciethewoodlands.com",
+    url: "https://renzograciethewoodlands.com",
+    sameAs: [
+      "https://www.instagram.com/renzo_gracie_the_woodlands/",
+      "https://www.facebook.com/renzograciethewoodlands1",
+      YOUTUBE_URL,
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Wednesday", "Friday"],
+        opens: "05:00",
+        closes: "20:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Tuesday", "Thursday"],
+        opens: "11:00",
+        closes: "20:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "08:00",
+        closes: "11:00",
+      },
+    ],
+  },
+];
 
 type Discipline = "BJJ" | "Muay Thai" | "Kids" | "MMA";
 type ClassItem = { time: string; name: string; coach?: string; discipline: Discipline };
@@ -129,9 +177,17 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
+      <Seo title={HOME_TITLE} description={HOME_DESCRIPTION} image={heroBg} structuredData={homeStructuredData} />
       {/* HERO */}
       <section className="grain relative min-h-[100svh] overflow-hidden">
-        <img src={heroBg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70" />
+        <img
+          src={heroBg}
+          alt=""
+          width={1920}
+          height={1280}
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover opacity-70"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-obsidian/70 to-obsidian" />
         {/* Top nav */}
         <div className="relative z-10 flex items-center justify-between px-6 pt-6 md:px-12 md:pt-8">
@@ -181,7 +237,7 @@ function Home() {
             <div className="mt-8 flex gap-5 text-muted-foreground">
               <a href="https://instagram.com/renzo_gracie_the_woodlands" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram size={20} /></a>
               <a href="https://facebook.com/renzograciethewoodlands1" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook size={20} /></a>
-              <a href="#" aria-label="YouTube" className="hover:text-primary transition-colors"><Youtube size={20} /></a>
+              <a href={YOUTUBE_URL} aria-label="YouTube" className="hover:text-primary transition-colors"><Youtube size={20} /></a>
             </div>
           </div>
         </div>
