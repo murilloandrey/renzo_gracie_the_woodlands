@@ -198,6 +198,14 @@ function Home() {
             </span>
           </div>
           <div className="flex items-center gap-4 text-xs md:gap-8">
+            <a
+              href="https://www.breakpointfc.com/collections/renzo-gracie-the-woodlands"
+              target="_blank"
+              rel="noreferrer"
+              className="font-display tracking-[0.18em] hover:text-primary"
+            >
+              Gear
+            </a>
             <a href="#" className="font-display tracking-[0.18em] hover:text-primary">Member Login</a>
             <a href="tel:+18325840565" className="font-display flex items-center gap-2 tracking-[0.18em] hover:text-primary">
               <Phone size={14} /> (832) 584-0565

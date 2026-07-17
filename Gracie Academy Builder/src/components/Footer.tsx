@@ -37,6 +37,16 @@ export function Footer() {
             <li><Link to="/" hash="first-day" className="hover:text-bone">Your First Day</Link></li>
             <li><Link to="/" hash="coaches" className="hover:text-bone">Coaches</Link></li>
             <li><Link to="/" hash="location" className="hover:text-bone">Location</Link></li>
+            <li>
+              <a
+                href="https://www.breakpointfc.com/collections/renzo-gracie-the-woodlands"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-bone"
+              >
+                Gear
+              </a>
+            </li>
           </ul>
         </div>
       </div>
