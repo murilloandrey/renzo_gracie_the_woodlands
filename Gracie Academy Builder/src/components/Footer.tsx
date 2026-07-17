@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.webp";
 import { Instagram, Facebook, Youtube, MapPin, Phone, Mail, MessageSquare } from "lucide-react";
 
-const YOUTUBE_URL = "https://www.youtube.com/@RenzoGracieTheWoodlands";
+const YOUTUBE_URL = "https://www.youtube.com/channel/UCOLzhYYnoYRtR_HPvRLXD3Q";
 
 export function Footer() {
   return (

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 });
 
 const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=9391+Grogans+Mill+Rd+Ste+B12+The+Woodlands+TX";
-const YOUTUBE_URL = "https://www.youtube.com/@RenzoGracieTheWoodlands";
+const YOUTUBE_URL = "https://www.youtube.com/channel/UCOLzhYYnoYRtR_HPvRLXD3Q";
 const HOME_TITLE = "Jiu Jitsu & MMA in The Woodlands TX | Free Trial | Renzo Gracie The Woodlands";
 const HOME_DESCRIPTION =
   "Train Brazilian Jiu-Jitsu, Muay Thai, MMA, and kids martial arts in The Woodlands, TX. Claim your free trial class at Renzo Gracie The Woodlands.";
