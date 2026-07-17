@@ -1,0 +1,2 @@
+// Update when the custom domain goes live.
+export const SITE_URL = import.meta.env.VITE_SITE_URL;

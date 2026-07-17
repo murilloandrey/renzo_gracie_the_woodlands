@@ -18,6 +18,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
+import { SITE_URL } from "@/config/site";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -43,7 +44,7 @@ const homeStructuredData = [
     },
     telephone: "+1-832-584-0565",
     email: "info@renzograciethewoodlands.com",
-    url: "https://renzograciethewoodlands.com",
+    url: SITE_URL,
     sameAs: [
       "https://www.instagram.com/renzo_gracie_the_woodlands/",
       "https://www.facebook.com/renzograciethewoodlands1",
