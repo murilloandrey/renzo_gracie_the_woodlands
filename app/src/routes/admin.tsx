@@ -18,13 +18,16 @@ function Admin() {
         noindex
       />
       <form
-        onSubmit={(e) => { e.preventDefault(); }}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
         className="w-full max-w-sm text-center"
       >
         <img src={logo} alt="" className="logo-white mx-auto h-14 w-14" />
         <h1 className="font-display mt-8 text-4xl">Staff Admin</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          Enter the admin password to manage the schedule, Instagram tiles, and trial leads.
+          Enter the admin password to manage the schedule, Instagram tiles, and
+          trial leads.
         </p>
         <input
           type="password"
@@ -33,7 +36,9 @@ function Admin() {
           placeholder="Password"
           className="mt-8 w-full rounded-sm border border-input bg-obsidian-elev px-4 py-3 text-sm focus:border-primary focus:outline-none"
         />
-        <button type="submit" className="btn-primary mt-4 w-full">Enter</button>
+        <button type="submit" className="btn-primary mt-4 w-full">
+          Enter
+        </button>
       </form>
     </div>
   );

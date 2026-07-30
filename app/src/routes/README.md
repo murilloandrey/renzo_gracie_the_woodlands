@@ -7,11 +7,11 @@ are Next.js / Remix conventions. The only root layout is `src/routes/__root.tsx`
 
 ## Conventions
 
-| File | URL |
-| --- | --- |
-| `index.tsx` | `/` |
-| `free-trial.tsx` | `/free-trial` |
-| `admin.tsx` | `/admin` |
-| `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
+| File             | URL                                                 |
+| ---------------- | --------------------------------------------------- |
+| `index.tsx`      | `/`                                                 |
+| `free-trial.tsx` | `/free-trial`                                       |
+| `admin.tsx`      | `/admin`                                            |
+| `__root.tsx`     | app shell — wraps every page; preserve `<Outlet />` |
 
 `routeTree.gen.ts` is auto-generated. Don't edit it by hand.

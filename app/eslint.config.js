@@ -26,12 +26,16 @@ export default tseslint.config(
           paths: [
             {
               name: "server-only",
-              message: "This Vite SPA does not use the Next.js `server-only` package.",
+              message:
+                "This Vite SPA does not use the Next.js `server-only` package.",
             },
           ],
         },
       ],
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
