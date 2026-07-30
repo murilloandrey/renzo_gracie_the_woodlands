@@ -21,10 +21,6 @@ import adultBjj from "@/assets/adult-bjj.jpg";
 import muayThai from "@/assets/muay-thai.jpg";
 import kidsBjj from "@/assets/kids-bjj.jpg";
 import mma from "@/assets/mma.jpg";
-import coach1 from "@/assets/coach-1.jpg";
-import coach2 from "@/assets/coach-2.jpg";
-import coachKids from "@/assets/coach-kids.jpg";
-import coachMma from "@/assets/coach-mma.jpg";
 import ig1 from "@/assets/ig-1.jpg";
 import ig2 from "@/assets/ig-2.jpg";
 import ig3 from "@/assets/ig-3.jpg";
@@ -148,56 +144,47 @@ const coaches = [
     name: "Professor Todd",
     role: "Head Instructor · BJJ",
     cred: "4th-Degree Black Belt",
-    img: coach1,
     badge: "4TH DEGREE",
   },
   {
     name: "Professor Eddie",
     role: "BJJ Instructor",
     cred: "Black Belt",
-    img: coach2,
   },
   {
     name: "Coach Vinnie",
     role: "BJJ Instructor",
     cred: "Adult & Early-Morning BJJ",
-    img: coach1,
   },
   {
     name: "Coach Phillipe",
     role: "Muay Thai Coach",
     cred: "The Science of Eight Limbs",
-    img: muayThai,
   },
   {
     name: "Coach Alex Garcia",
     role: "BJJ Instructor",
     cred: "Adult Gi & No-Gi",
-    img: coach1,
   },
   {
     name: "Coach Nathan Bates",
     role: "Kids & Teens BJJ",
     cred: "Building Young Champions",
-    img: coachKids,
   },
   {
     name: "Coach Vinny",
     role: "Kids & Teens BJJ",
     cred: "Junior Development",
-    img: coachKids,
   },
   {
     name: "Coach Ollie",
     role: "MMA Coach",
     cred: "All-Ages Mixed Martial Arts",
-    img: coachMma,
   },
   {
     name: "Fadi Khouri",
     role: "BJJ Instructor",
     cred: "Evening & Open Mat",
-    img: coach2,
   },
 ];
 
@@ -582,29 +569,22 @@ function Home() {
           title="The Coaches"
           note="World-class credentials, handed down from one of the most respected lineages in martial arts."
         />
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
           {coaches.map((c) => (
             <div
               key={c.name}
-              className="group relative overflow-hidden border border-border"
+              className="relative min-h-48 border border-border p-5 md:min-h-56 md:p-7"
             >
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <img
-                  src={c.img}
-                  alt={c.name}
-                  loading="lazy"
-                  className="h-full w-full object-cover grayscale brightness-75 transition-all duration-700 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-transparent to-transparent" />
-                {c.badge && (
-                  <span className="absolute right-3 top-3 border border-bone/60 px-2 py-1 font-display text-[10px] tracking-[0.18em]">
-                    {c.badge}
-                  </span>
-                )}
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-lg">{c.name}</h3>
-                <div className="mt-1 font-display text-[10px] tracking-[0.18em] text-muted-foreground">
+              {c.badge && (
+                <span className="absolute right-3 top-3 border border-bone/60 px-2 py-1 font-display text-[10px] tracking-[0.18em]">
+                  {c.badge}
+                </span>
+              )}
+              <div className="flex h-full flex-col justify-end">
+                <h3 className="font-display text-3xl leading-none md:text-4xl">
+                  {c.name}
+                </h3>
+                <div className="mt-3 font-display text-[10px] tracking-[0.18em] text-muted-foreground">
                   {c.role}
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">{c.cred}</p>
