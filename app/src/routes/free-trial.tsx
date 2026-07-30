@@ -15,6 +15,7 @@ import logo from "@/assets/logo.webp";
 import heroBg from "@/assets/hero-bg.jpg";
 import { Footer } from "@/components/Footer";
 import { Seo } from "@/components/Seo";
+import { GYM_TIMEZONE, WEEKLY_SCHEDULE } from "@/lib/schedule";
 
 export const Route = createFileRoute("/free-trial")({
   component: FreeTrial,
@@ -22,6 +23,16 @@ export const Route = createFileRoute("/free-trial")({
 
 const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=9391+Grogans+Mill+Rd+Ste+B12+The+Woodlands+TX";
+
+const availableDays = [...new Set(WEEKLY_SCHEDULE.map(({ day }) => day))];
+const dayFormatter = new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  timeZone: GYM_TIMEZONE,
+});
+
+function formatDay(day: number): string {
+  return dayFormatter.format(new Date(Date.UTC(2024, 0, 7 + day, 12)));
+}
 
 function FreeTrial() {
   const [sent, setSent] = useState(false);
@@ -110,15 +121,8 @@ function FreeTrial() {
                     <option value="" disabled>
                       Select...
                     </option>
-                    {[
-                      "Monday",
-                      "Tuesday",
-                      "Wednesday",
-                      "Thursday",
-                      "Friday",
-                      "Saturday",
-                    ].map((d) => (
-                      <option key={d}>{d}</option>
+                    {availableDays.map((day) => (
+                      <option key={day}>{formatDay(day)}</option>
                     ))}
                   </select>
                 </Field>

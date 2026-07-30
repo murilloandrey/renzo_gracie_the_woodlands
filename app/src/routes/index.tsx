@@ -32,7 +32,17 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
+import { TrainingNow } from "@/components/TrainingNow";
 import { SITE_URL } from "@/config/site";
+import {
+  DAY_LABELS,
+  DISCIPLINE_LABELS,
+  GYM_TIMEZONE,
+  WEEKLY_SCHEDULE,
+  formatTime,
+  type DayIndex,
+  type Discipline,
+} from "@/lib/schedule";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -45,6 +55,27 @@ const HOME_TITLE =
   "Jiu Jitsu & MMA in The Woodlands TX | Free Trial | Renzo Gracie The Woodlands";
 const HOME_DESCRIPTION =
   "Train Brazilian Jiu-Jitsu, Muay Thai, MMA, and kids martial arts in The Woodlands, TX. Claim your free trial class at Renzo Gracie The Woodlands.";
+
+const scheduleDays: DayIndex[] = [1, 2, 3, 4, 5, 6];
+const disciplineFilters: Array<{
+  value: "ALL" | Discipline;
+  label: string;
+}> = [
+  { value: "ALL", label: "ALL" },
+  ...(["bjj", "muay-thai", "kids", "mma"] as const).map((value) => ({
+    value,
+    label: DISCIPLINE_LABELS[value],
+  })),
+];
+
+function formatScheduleRange(startMinutes: number, endMinutes: number): string {
+  const start = formatTime(startMinutes);
+  const end = formatTime(endMinutes);
+  const startMeridiem = start.slice(-2);
+  const endMeridiem = end.slice(-2);
+
+  return `${startMeridiem === endMeridiem ? start.slice(0, -3) : start}–${end}`;
+}
 
 const homeStructuredData = [
   {
@@ -87,216 +118,6 @@ const homeStructuredData = [
       },
     ],
   },
-];
-
-type Discipline = "BJJ" | "Muay Thai" | "Kids" | "MMA";
-type ClassItem = {
-  time: string;
-  name: string;
-  coach?: string;
-  discipline: Discipline;
-};
-
-const schedule: Record<string, ClassItem[]> = {
-  MON: [
-    {
-      time: "5:00–6:00 AM",
-      name: "Adult BJJ No-Gi",
-      coach: "Vinnie",
-      discipline: "BJJ",
-    },
-    {
-      time: "6:30–7:30 AM",
-      name: "Adult Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "8:30–9:30 AM",
-      name: "All-Ages Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "11:00 AM–12:00 PM",
-      name: "Adult BJJ Gi",
-      coach: "Todd / Alex",
-      discipline: "BJJ",
-    },
-    {
-      time: "5:00–6:00 PM",
-      name: "Kids BJJ Gi 7+",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–7:00 PM",
-      name: "Teen BJJ",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–8:00 PM",
-      name: "Adult BJJ",
-      coach: "Fadi",
-      discipline: "BJJ",
-    },
-  ],
-  TUE: [
-    {
-      time: "11:00 AM–12:00 PM",
-      name: "Adult BJJ No-Gi",
-      coach: "Todd / Alex",
-      discipline: "BJJ",
-    },
-    {
-      time: "5:00–6:00 PM",
-      name: "Kids BJJ Gi 7+",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–7:00 PM",
-      name: "Adult Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "7:00–8:00 PM",
-      name: "Beginner Adult/Teen BJJ No-Gi",
-      coach: "Eddie / Nathan / Vinny",
-      discipline: "BJJ",
-    },
-  ],
-  WED: [
-    {
-      time: "5:00–6:00 AM",
-      name: "Adult BJJ Gi",
-      coach: "Vinnie",
-      discipline: "BJJ",
-    },
-    {
-      time: "6:30–7:30 AM",
-      name: "Adult Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "8:30–9:30 AM",
-      name: "All-Ages Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "11:00 AM–12:00 PM",
-      name: "Adult BJJ Gi",
-      coach: "Todd / Alex",
-      discipline: "BJJ",
-    },
-    {
-      time: "5:00–6:00 PM",
-      name: "Kids BJJ Gi 7+",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–7:00 PM",
-      name: "Teen BJJ",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–8:00 PM",
-      name: "Adult BJJ",
-      coach: "Fadi",
-      discipline: "BJJ",
-    },
-  ],
-  THU: [
-    {
-      time: "11:00 AM–12:00 PM",
-      name: "Adult BJJ No-Gi",
-      coach: "Todd / Alex",
-      discipline: "BJJ",
-    },
-    {
-      time: "5:00–6:00 PM",
-      name: "Kids BJJ Gi 7+",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–7:00 PM",
-      name: "Adult Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "7:00–8:00 PM",
-      name: "Beginner Adult/Teen BJJ No-Gi",
-      coach: "Eddie / Nathan / Vinny",
-      discipline: "BJJ",
-    },
-  ],
-  FRI: [
-    {
-      time: "5:00–6:00 AM",
-      name: "Adult BJJ Rotating",
-      coach: "Vinnie",
-      discipline: "BJJ",
-    },
-    {
-      time: "6:30–7:30 AM",
-      name: "Adult Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "8:30–9:30 AM",
-      name: "All-Ages Muay Thai",
-      coach: "Phillipe",
-      discipline: "Muay Thai",
-    },
-    {
-      time: "11:00 AM–12:00 PM",
-      name: "Open Mat (Gi & No-Gi)",
-      discipline: "BJJ",
-    },
-    {
-      time: "5:00–6:00 PM",
-      name: "Kids BJJ Gi 7+",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-    {
-      time: "6:00–7:30 PM",
-      name: "MMA All Ages",
-      coach: "Ollie",
-      discipline: "MMA",
-    },
-  ],
-  SAT: [
-    {
-      time: "8:00–9:30 AM",
-      name: "Adult BJJ Open Mat",
-      coach: "Fadi",
-      discipline: "BJJ",
-    },
-    {
-      time: "10:00–11:00 AM",
-      name: "Kids BJJ Competition Class",
-      coach: "Nathan / Vinny",
-      discipline: "Kids",
-    },
-  ],
-};
-
-const disciplineFilters: ("ALL" | Discipline)[] = [
-  "ALL",
-  "BJJ",
-  "Muay Thai",
-  "Kids",
-  "MMA",
 ];
 
 const disciplines = [
@@ -450,8 +271,6 @@ function Stars() {
 function Home() {
   const [filter, setFilter] = useState<"ALL" | Discipline>("ALL");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  const days = Object.keys(schedule);
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
@@ -626,51 +445,56 @@ function Home() {
             </>
           }
         />
+        <TrainingNow className="mb-8" />
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-2">
             {disciplineFilters.map((f) => (
               <button
-                key={f}
-                onClick={() => setFilter(f)}
+                key={f.value}
+                onClick={() => setFilter(f.value)}
                 className={`font-display border px-4 py-2 text-xs tracking-[0.18em] transition-all ${
-                  filter === f
+                  filter === f.value
                     ? "border-primary bg-primary text-white"
                     : "border-border text-muted-foreground hover:text-bone"
                 }`}
               >
-                {f.toUpperCase()}
+                {f.label.toUpperCase()}
               </button>
             ))}
           </div>
           <div className="font-display text-sm tracking-[0.18em] text-muted-foreground">
             {new Date()
-              .toLocaleString("en-US", { month: "long", year: "numeric" })
+              .toLocaleString("en-US", {
+                month: "long",
+                year: "numeric",
+                timeZone: GYM_TIMEZONE,
+              })
               .toUpperCase()}
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-6">
-          {days.map((day) => {
-            const items = schedule[day].filter(
-              (c) => filter === "ALL" || c.discipline === filter,
-            );
+          {scheduleDays.map((day) => {
+            const items = WEEKLY_SCHEDULE.filter(
+              (classSlot) => classSlot.day === day,
+            ).filter((c) => filter === "ALL" || c.discipline === filter);
             return (
               <div key={day}>
                 <div className="mb-3 border-b border-border pb-2 font-display text-sm tracking-[0.18em]">
-                  {day}
+                  {DAY_LABELS[day].toUpperCase()}
                 </div>
                 <div className="space-y-2">
                   {items.length === 0 && (
                     <div className="text-xs text-muted-foreground/60">—</div>
                   )}
-                  {items.map((c, i) => (
+                  {items.map((c) => (
                     <div
-                      key={i}
+                      key={`${c.day}-${c.start}-${c.title}`}
                       className="rounded-sm border border-border bg-card p-3 transition-colors hover:border-primary/50"
                     >
                       <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
-                        {c.time}
+                        {formatScheduleRange(c.start, c.end)}
                       </div>
-                      <div className="mt-1.5 text-sm text-bone">{c.name}</div>
+                      <div className="mt-1.5 text-sm text-bone">{c.title}</div>
                       <div className="mt-1 text-xs text-muted-foreground">
                         {c.coach ?? "—"}
                       </div>
