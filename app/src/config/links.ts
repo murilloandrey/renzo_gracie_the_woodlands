@@ -25,25 +25,3 @@ export const GEAR_URL =
 
 export const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=9391+Grogans+Mill+Rd+Ste+B12+The+Woodlands+TX";
-
-/**
- * Zen Planner member portal.
- *
- * Every gym gets its own portal URL — zenplanner.com's marketing site will NOT
- * log a member in. Ask the owner to send you the exact link his members use
- * (Zen Planner staff console -> Setup -> Member Portal, or the link in the
- * welcome email he sends new members). It usually looks like:
- *
- *   https://studio.zenplanner.com/zenplanner/portal/login.cfm?...
- *   https://<gym-partition>.zenplanner.com/...
- *
- * Leave this as an empty string until you have the real URL. The Member Login
- * link renders as a "Coming soon"-free fallback rather than a dead `#`.
- */
-export const MEMBER_PORTAL_URL = "";
-
-/** Zen Planner's member-facing apps, useful as a secondary link. */
-export const MEMBER_APP_IOS =
-  "https://apps.apple.com/us/app/zen-planner-member-app/id1065000091";
-export const MEMBER_APP_ANDROID =
-  "https://play.google.com/store/apps/details?id=com.zenplanner.member";

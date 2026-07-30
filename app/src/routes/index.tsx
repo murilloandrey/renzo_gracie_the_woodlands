@@ -33,6 +33,11 @@ import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
 import { TrainingNow } from "@/components/TrainingNow";
+import {
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  GOOGLE_REVIEWS_URL,
+} from "@/config/reviews";
 import { SITE_URL } from "@/config/site";
 import {
   DAY_LABELS,
@@ -310,12 +315,6 @@ function Home() {
               className="font-display tracking-[0.18em] hover:text-primary"
             >
               Gear
-            </a>
-            <a
-              href="#"
-              className="font-display tracking-[0.18em] hover:text-primary"
-            >
-              Member Login
             </a>
             <a
               href="tel:+18325840565"
@@ -617,10 +616,29 @@ function Home() {
 
       {/* TESTIMONIALS */}
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
-        <SectionHeader
-          eyebrow="06 — Voices from the Mat"
-          title="Five-Star Reputation"
-        />
+        <div className="mb-12 md:mb-16">
+          <div className="eyebrow mb-4">06 — Voices from the Mat</div>
+          <h2 className="font-display text-5xl md:text-7xl">
+            Five-Star Reputation
+          </h2>
+          {GOOGLE_REVIEW_COUNT > 0 && (
+            <p className="mt-4 text-sm text-muted-foreground">
+              {GOOGLE_RATING.toFixed(1)} stars on Google —{" "}
+              {GOOGLE_REVIEWS_URL ? (
+                <a
+                  href={GOOGLE_REVIEWS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-primary/60 underline-offset-4 hover:text-bone"
+                >
+                  {GOOGLE_REVIEW_COUNT} reviews
+                </a>
+              ) : (
+                `${GOOGLE_REVIEW_COUNT} reviews`
+              )}
+            </p>
+          )}
+        </div>
         <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <div className="eyebrow mb-3">Student Testimonial</div>
