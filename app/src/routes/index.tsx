@@ -7,7 +7,6 @@ import {
   Phone,
   MapPin,
   ChevronRight,
-  Play,
   Plus,
   Minus,
   MessageSquare,
@@ -37,6 +36,7 @@ import {
   GOOGLE_REVIEWS_URL,
 } from "@/config/reviews";
 import { EVENTS } from "@/config/analytics";
+import { INSTAGRAM_URL } from "@/config/links";
 import { SITE_URL } from "@/config/site";
 import { trackEvent } from "@/lib/analytics";
 import {
@@ -249,8 +249,6 @@ const igTiles = [
   { img: ig1, label: "STUDENT STORY · BOYD" },
   { img: ig2, label: null },
   { img: ig3, label: "STUDENT STORY · MARTIN" },
-  { img: adultBjj, label: null },
-  { img: muayThai, label: "STUDENT STORY · JAMES" },
   { img: mma, label: null },
 ];
 
@@ -628,15 +626,19 @@ function Home() {
             </p>
           )}
         </div>
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr]">
-          <div>
-            <div className="eyebrow mb-3">Student Testimonial</div>
-            <p className="mb-6 max-w-xl text-sm text-muted-foreground">
-              Don't just take it from us — hear it from Ilena, an active
-              competitor at the academy.
-            </p>
-            <div className="aspect-video overflow-hidden border border-border bg-card">
-              {TESTIMONIAL_VIDEO_ID ? (
+        <div
+          className={
+            TESTIMONIAL_VIDEO_ID ? "grid gap-6 lg:grid-cols-[1.15fr_1fr]" : ""
+          }
+        >
+          {TESTIMONIAL_VIDEO_ID && (
+            <div>
+              <div className="eyebrow mb-3">Student Testimonial</div>
+              <p className="mb-6 max-w-xl text-sm text-muted-foreground">
+                Don't just take it from us — hear it from Ilena, an active
+                competitor at the academy.
+              </p>
+              <div className="aspect-video overflow-hidden border border-border bg-card">
                 <iframe
                   title="Student testimonial from Ilena at Renzo Gracie The Woodlands"
                   src={`https://www.youtube-nocookie.com/embed/${TESTIMONIAL_VIDEO_ID}`}
@@ -645,19 +647,14 @@ function Home() {
                   allowFullScreen
                   className="h-full w-full"
                 />
-              ) : (
-                <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground">
-                  <div className="rounded-full border border-bone/30 p-4">
-                    <Play size={28} fill="currentColor" />
-                  </div>
-                  <div className="font-display text-xs tracking-[0.18em]">
-                    Video Coming Soon
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+          )}
+          <div
+            className={`grid gap-4 sm:grid-cols-2 ${
+              TESTIMONIAL_VIDEO_ID ? "lg:grid-cols-1" : ""
+            }`}
+          >
             {testimonials.map((t) => (
               <div key={t.name} className="border border-border bg-card p-6">
                 <Stars />
@@ -864,7 +861,7 @@ function Home() {
             </p>
           </div>
           <a
-            href="https://instagram.com/renzo_gracie_the_woodlands"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noreferrer"
             className="btn-outline"
@@ -876,7 +873,9 @@ function Home() {
           {igTiles.map((t, i) => (
             <a
               key={i}
-              href="#"
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative block aspect-square overflow-hidden border border-border"
             >
               <img
@@ -885,11 +884,6 @@ function Home() {
                 loading="lazy"
                 className="h-full w-full object-cover grayscale brightness-50 transition-all duration-700 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="rounded-full border border-bone/40 bg-obsidian/40 p-3 backdrop-blur-sm transition-transform group-hover:scale-110">
-                  <Play size={20} className="text-bone" fill="currentColor" />
-                </div>
-              </div>
               {t.label && (
                 <span className="absolute left-3 bottom-3 border border-bone/40 bg-obsidian/60 px-2 py-1 font-display text-[10px] tracking-[0.18em] backdrop-blur-sm">
                   {t.label}
