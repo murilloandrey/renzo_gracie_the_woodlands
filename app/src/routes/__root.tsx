@@ -5,6 +5,7 @@ import {
   useRouter,
 } from "@tanstack/react-router";
 import { Analytics } from "@/components/Analytics";
+import { LeadPopup } from "@/components/LeadPopup";
 
 function NotFoundComponent() {
   return (
@@ -76,6 +77,7 @@ function RootComponent() {
   return (
     <>
       <Outlet />
+      <LeadPopup />
       <Analytics />
     </>
   );
