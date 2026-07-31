@@ -28,6 +28,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
+import { TechniqueShowcase } from "@/components/TechniqueShowcase";
 import { TrainingNow } from "@/components/TrainingNow";
 import {
   GOOGLE_RATING,
@@ -664,6 +665,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <TechniqueShowcase />
 
       {/* FOR YOU */}
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">

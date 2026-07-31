@@ -26,6 +26,18 @@ function setMeta(
   tag.setAttribute("content", content);
 }
 
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]',
+  );
+  if (!link) {
+    link = document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    document.head.appendChild(link);
+  }
+  link.setAttribute("href", href);
+}
+
 export function Seo({
   title,
   description,
@@ -39,6 +51,11 @@ export function Seo({
     const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
     document.title = title;
+
+    // Canonical. Without this, Vercel preview URLs and any ?utm_ variant can be
+    // indexed as separate duplicate pages competing with the real one.
+    setCanonical(canonicalUrl);
+
     setMeta('meta[name="description"]', "name", "description", description);
     setMeta('meta[property="og:title"]', "property", "og:title", title);
     setMeta(
@@ -50,6 +67,13 @@ export function Seo({
     setMeta('meta[property="og:type"]', "property", "og:type", "website");
     setMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
     setMeta('meta[property="og:image"]', "property", "og:image", imageUrl);
+    setMeta(
+      'meta[property="og:site_name"]',
+      "property",
+      "og:site_name",
+      "Renzo Gracie The Woodlands",
+    );
+    setMeta('meta[property="og:locale"]', "property", "og:locale", "en_US");
     setMeta(
       'meta[name="twitter:card"]',
       "name",
@@ -69,7 +93,7 @@ export function Seo({
       'meta[name="robots"]',
     );
     if (noindex) {
-      setMeta('meta[name="robots"]', "name", "robots", "noindex");
+      setMeta('meta[name="robots"]', "name", "robots", "noindex, nofollow");
     } else {
       robots?.remove();
     }
