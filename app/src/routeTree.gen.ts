@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from "./routes/__root";
 import { Route as FreeTrialRouteImport } from "./routes/free-trial";
 import { Route as AdminRouteImport } from "./routes/admin";
 import { Route as IndexRouteImport } from "./routes/index";
+import { Route as PrivacyRouteImport } from "./routes/privacy";
 
 const FreeTrialRoute = FreeTrialRouteImport.update({
   id: "/free-trial",
@@ -28,35 +29,44 @@ const IndexRoute = IndexRouteImport.update({
   path: "/",
   getParentRoute: () => rootRouteImport,
 } as any);
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: "/privacy",
+  path: "/privacy",
+  getParentRoute: () => rootRouteImport,
+} as any);
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/admin": typeof AdminRoute;
   "/free-trial": typeof FreeTrialRoute;
+  "/privacy": typeof PrivacyRoute;
 }
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/admin": typeof AdminRoute;
   "/free-trial": typeof FreeTrialRoute;
+  "/privacy": typeof PrivacyRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   "/": typeof IndexRoute;
   "/admin": typeof AdminRoute;
   "/free-trial": typeof FreeTrialRoute;
+  "/privacy": typeof PrivacyRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/admin" | "/free-trial";
+  fullPaths: "/" | "/admin" | "/free-trial" | "/privacy";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/admin" | "/free-trial";
-  id: "__root__" | "/" | "/admin" | "/free-trial";
+  to: "/" | "/admin" | "/free-trial" | "/privacy";
+  id: "__root__" | "/" | "/admin" | "/free-trial" | "/privacy";
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute;
   AdminRoute: typeof AdminRoute;
   FreeTrialRoute: typeof FreeTrialRoute;
+  PrivacyRoute: typeof PrivacyRoute;
 }
 
 declare module "@tanstack/react-router" {
@@ -82,6 +92,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    "/privacy": {
+      id: "/privacy";
+      path: "/privacy";
+      fullPath: "/privacy";
+      preLoaderRoute: typeof PrivacyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   FreeTrialRoute: FreeTrialRoute,
+  PrivacyRoute: PrivacyRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

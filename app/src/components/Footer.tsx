@@ -113,6 +113,11 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/privacy" className="hover:text-bone">
+                Privacy
+              </Link>
+            </li>
+            <li>
               <a
                 href="https://www.breakpointfc.com/collections/renzo-gracie-the-woodlands"
                 target="_blank"
