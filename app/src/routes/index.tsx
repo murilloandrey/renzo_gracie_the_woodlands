@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   Instagram,
   Facebook,
@@ -26,6 +26,8 @@ import ig3 from "@/assets/ig-3.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
 import { CompetitionTeam } from "@/components/CompetitionTeam";
+import { CoachCard } from "@/components/CoachCard";
+import { CoachDetail } from "@/components/CoachDetail";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
 import { TechniqueShowcase } from "@/components/TechniqueShowcase";
@@ -39,6 +41,7 @@ import { EVENTS } from "@/config/analytics";
 import { INSTAGRAM_URL } from "@/config/links";
 import { SITE_URL } from "@/config/site";
 import { trackEvent } from "@/lib/analytics";
+import { COACHES, type Coach } from "@/lib/coaches";
 import {
   DAY_LABELS,
   DISCIPLINE_LABELS,
@@ -143,55 +146,6 @@ const disciplines = [
   { n: "04", title: "MMA", tag: "The Ultimate Integration", img: mma },
 ];
 
-const coaches = [
-  {
-    name: "Professor Todd",
-    role: "Head Instructor · BJJ",
-    cred: "4th-Degree Black Belt",
-    badge: "4TH DEGREE",
-  },
-  {
-    name: "Professor Eddie",
-    role: "BJJ Instructor",
-    cred: "Black Belt",
-  },
-  {
-    name: "Coach Vinnie",
-    role: "BJJ Instructor",
-    cred: "Adult & Early-Morning BJJ",
-  },
-  {
-    name: "Coach Phillipe",
-    role: "Muay Thai Coach",
-    cred: "The Science of Eight Limbs",
-  },
-  {
-    name: "Coach Alex Garcia",
-    role: "BJJ Instructor",
-    cred: "Adult Gi & No-Gi",
-  },
-  {
-    name: "Coach Nathan Bates",
-    role: "Kids & Teens BJJ",
-    cred: "Building Young Champions",
-  },
-  {
-    name: "Coach Vinny",
-    role: "Kids & Teens BJJ",
-    cred: "Junior Development",
-  },
-  {
-    name: "Coach Ollie",
-    role: "MMA Coach",
-    cred: "All-Ages Mixed Martial Arts",
-  },
-  {
-    name: "Fadi Khouri",
-    role: "BJJ Instructor",
-    cred: "Evening & Open Mat",
-  },
-];
-
 const testimonials = [
   {
     name: "Boyd",
@@ -265,6 +219,8 @@ function Stars() {
 function Home() {
   const [filter, setFilter] = useState<"ALL" | Discipline>("ALL");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [selectedCoach, setSelectedCoach] = useState<Coach | null>(null);
+  const closeCoachDetail = useCallback(() => setSelectedCoach(null), []);
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
@@ -575,28 +531,17 @@ function Home() {
           note="World-class credentials, handed down from one of the most respected lineages in martial arts."
         />
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {coaches.map((c) => (
-            <div
-              key={c.name}
-              className="relative min-h-48 border border-border p-5 md:min-h-56 md:p-7"
-            >
-              {c.badge && (
-                <span className="absolute right-3 top-3 border border-bone/60 px-2 py-1 font-display text-[10px] tracking-[0.18em]">
-                  {c.badge}
-                </span>
-              )}
-              <div className="flex h-full flex-col justify-end">
-                <h3 className="font-display text-3xl leading-none md:text-4xl">
-                  {c.name}
-                </h3>
-                <div className="mt-3 font-display text-[10px] tracking-[0.18em] text-muted-foreground">
-                  {c.role}
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">{c.cred}</p>
-              </div>
-            </div>
+          {COACHES.map((coach) => (
+            <CoachCard
+              key={coach.name}
+              coach={coach}
+              onSelect={setSelectedCoach}
+            />
           ))}
         </div>
+        {selectedCoach && (
+          <CoachDetail coach={selectedCoach} onClose={closeCoachDetail} />
+        )}
       </section>
 
       <CompetitionTeam />
