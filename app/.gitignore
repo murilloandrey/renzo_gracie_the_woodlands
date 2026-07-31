@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vite/
+
+# Vercel
+.vercel
+
+# Environment — NEVER commit these.
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.DS_Store
+*.local

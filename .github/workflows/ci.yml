@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  APP_DIR: app
+
+jobs:
+  verify:
+    name: Lint, typecheck, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL || 'https://renzo-gracie-the-woodlands-ivory.vercel.app' }}
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+
+      - name: Report build output
+        run: |
+          {
+            echo "### Build output"
+            echo '```'
+            du -sh dist
+            find dist/assets -type f \( -name '*.js' -o -name '*.css' \) -printf '%f  %s bytes\n' | sort
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  guard-secrets:
+    name: Guard against committed secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fail if any .env is tracked
+        run: |
+          set -e
+          TRACKED=$(git ls-files -- '*.env' '.env' '**/.env' '**/.env.*' \
+            | grep -v '\.env\.example$' || true)
+          if [ -n "$TRACKED" ]; then
+            echo "::error::These .env files are tracked in git:"
+            echo "$TRACKED"
+            echo "::error::Move the values into Vercel environment variables and run: git rm --cached <file>"
+            exit 1
+          fi
+          echo "No tracked .env files."
+
+      - name: Scan for secrets
+        run: |
+          set +e
+          FAIL=0
+
+          SECRETS='(SUPABASE_SERVICE_ROLE|SERVICE_ROLE_KEY|sk_live_|sk_test_|re_[A-Za-z0-9]{24,}|AKIA[0-9A-Z]{16}|-----BEGIN [A-Z ]*PRIVATE KEY-----)'
+          HITS=$(git grep -nIE "$SECRETS" -- . ':!*package-lock.json' ':!.github/workflows/ci.yml')
+          if [ -n "$HITS" ]; then
+            echo "::error::Possible secret committed:"; echo "$HITS"; FAIL=1
+          fi
+
+          if [ "$FAIL" -eq 0 ]; then echo "Clean."; fi
+          exit $FAIL
