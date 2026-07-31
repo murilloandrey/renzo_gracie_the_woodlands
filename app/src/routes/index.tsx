@@ -36,7 +36,9 @@ import {
   GOOGLE_REVIEW_COUNT,
   GOOGLE_REVIEWS_URL,
 } from "@/config/reviews";
+import { EVENTS } from "@/config/analytics";
 import { SITE_URL } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
 import {
   DAY_LABELS,
   DISCIPLINE_LABELS,
@@ -439,7 +441,10 @@ function Home() {
             {disciplineFilters.map((f) => (
               <button
                 key={f.value}
-                onClick={() => setFilter(f.value)}
+                onClick={() => {
+                  setFilter(f.value);
+                  trackEvent(EVENTS.scheduleFiltered, { filter: f.value });
+                }}
                 className={`font-display border px-4 py-2 text-xs tracking-[0.18em] transition-all ${
                   filter === f.value
                     ? "border-primary bg-primary text-white"

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Check,
   ChevronRight,
@@ -15,6 +15,8 @@ import logo from "@/assets/logo.webp";
 import heroBg from "@/assets/hero-bg.jpg";
 import { Footer } from "@/components/Footer";
 import { Seo } from "@/components/Seo";
+import { EVENTS } from "@/config/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { GYM_TIMEZONE, WEEKLY_SCHEDULE } from "@/lib/schedule";
 
 export const Route = createFileRoute("/free-trial")({
@@ -36,6 +38,13 @@ function formatDay(day: number): string {
 
 function FreeTrial() {
   const [sent, setSent] = useState(false);
+  const startedRef = useRef(false);
+
+  const onFormInput = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    trackEvent(EVENTS.trialFormStarted);
+  };
 
   return (
     <div className="min-h-screen bg-obsidian text-bone">
@@ -87,22 +96,41 @@ function FreeTrial() {
             </div>
           ) : (
             <form
+              onInput={onFormInput}
               onSubmit={(e) => {
                 e.preventDefault();
+                trackEvent(EVENTS.trialFormSubmitted);
                 setSent(true);
               }}
               className="space-y-5 border border-border bg-card p-6 md:p-10"
             >
               <div className="grid gap-5 md:grid-cols-2">
                 <Field label="Full Name" required>
-                  <input required className="input" name="name" />
+                  <input
+                    required
+                    className="input"
+                    name="name"
+                    data-clarity-mask="true"
+                  />
                 </Field>
                 <Field label="Phone" required>
-                  <input required type="tel" className="input" name="phone" />
+                  <input
+                    required
+                    type="tel"
+                    className="input"
+                    name="phone"
+                    data-clarity-mask="true"
+                  />
                 </Field>
               </div>
               <Field label="Email" required>
-                <input required type="email" className="input" name="email" />
+                <input
+                  required
+                  type="email"
+                  className="input"
+                  name="email"
+                  data-clarity-mask="true"
+                />
               </Field>
               <div className="grid gap-5 md:grid-cols-2">
                 <Field label="Program of Interest" required>

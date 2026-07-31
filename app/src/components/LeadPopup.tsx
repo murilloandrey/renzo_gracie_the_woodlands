@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 
 import { POPUP_CONFIG, POPUP_ENABLED, offer } from "@/config/offer";
+import { EVENTS } from "@/config/analytics";
 import { isValidEmail, submitLead } from "@/lib/leads";
 import { SMS_URL } from "@/config/links";
+import { trackEvent } from "@/lib/analytics";
 
 const DISMISSED_KEY = "rgw.lead.dismissedAt";
 const SUBMITTED_KEY = "rgw.lead.submitted";
@@ -59,6 +61,7 @@ export function LeadPopup() {
     firedRef.current = true;
     returnFocusRef.current = document.activeElement;
     setOpen(true);
+    trackEvent(EVENTS.leadPopupShown);
   }, []);
 
   // Triggers: dwell, scroll depth, exit intent. First one wins.
@@ -161,6 +164,7 @@ export function LeadPopup() {
     if (result.ok) {
       storage()?.setItem(SUBMITTED_KEY, "1");
       setStatus("success");
+      trackEvent(EVENTS.leadSubmitted);
       return;
     }
 
@@ -236,6 +240,7 @@ export function LeadPopup() {
                 type="email"
                 inputMode="email"
                 autoComplete="email"
+                data-clarity-mask="true"
                 required
                 value={email}
                 onChange={(event) => {

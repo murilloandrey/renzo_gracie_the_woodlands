@@ -4,6 +4,7 @@ import {
   createRootRoute,
   useRouter,
 } from "@tanstack/react-router";
+import { Analytics } from "@/components/Analytics";
 
 function NotFoundComponent() {
   return (
@@ -72,5 +73,10 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <Analytics />
+    </>
+  );
 }

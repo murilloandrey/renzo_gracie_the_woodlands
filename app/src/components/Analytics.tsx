@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useRouterState } from "@tanstack/react-router";
 
-import { initAnalytics, trackPageview } from "@/lib/analytics";
+import { EVENTS } from "@/config/analytics";
+import { initAnalytics, trackEvent, trackPageview } from "@/lib/analytics";
 
 /**
  * Mount once in __root.tsx. Boots GA4 + Clarity and reports a pageview on every
@@ -16,6 +17,32 @@ export function Analytics() {
 
   useEffect(() => {
     initAnalytics();
+
+    const onClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const anchor = target.closest<HTMLAnchorElement>("a[href]");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href") ?? "";
+      if (href.startsWith("tel:")) {
+        trackEvent(EVENTS.clickCall);
+      } else if (href.startsWith("sms:")) {
+        trackEvent(EVENTS.clickText);
+      } else {
+        const url = new URL(anchor.href, window.location.href);
+        if (
+          url.hostname.endsWith("google.com") &&
+          url.pathname.startsWith("/maps/dir")
+        ) {
+          trackEvent(EVENTS.clickDirections);
+        }
+      }
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
   }, []);
 
   useEffect(() => {

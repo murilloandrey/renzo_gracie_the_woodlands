@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Play, ShieldAlert } from "lucide-react";
 
 import { SectionHeader } from "@/components/SectionHeader";
+import { EVENTS } from "@/config/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { TECHNIQUES, hasTechniques, type Technique } from "@/lib/techniques";
 
 /**
@@ -11,7 +13,15 @@ import { TECHNIQUES, hasTechniques, type Technique } from "@/lib/techniques";
  * even if nobody presses play. This renders a poster frame and only mounts the
  * iframe after a click, which keeps the page fast for the 95% who never watch.
  */
-function VideoFacade({ videoId, label }: { videoId: string; label: string }) {
+function VideoFacade({
+  videoId,
+  label,
+  technique,
+}: {
+  videoId: string;
+  label: string;
+  technique: string;
+}) {
   const [active, setActive] = useState(false);
 
   if (active) {
@@ -29,7 +39,10 @@ function VideoFacade({ videoId, label }: { videoId: string; label: string }) {
   return (
     <button
       type="button"
-      onClick={() => setActive(true)}
+      onClick={() => {
+        setActive(true);
+        trackEvent(EVENTS.techniqueVideoPlayed, { technique });
+      }}
       aria-label={`Play: ${label}`}
       className="group relative block h-full w-full overflow-hidden"
     >
@@ -56,6 +69,7 @@ function TechniqueCard({ technique }: { technique: Technique }) {
           <VideoFacade
             videoId={technique.videoId}
             label={`${technique.name} — Renzo Gracie The Woodlands`}
+            technique={technique.name}
           />
         </div>
       )}
