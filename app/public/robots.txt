@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Update the host when the custom domain goes live.
+Sitemap: https://renzo-gracie-the-woodlands-ivory.vercel.app/sitemap.xml
