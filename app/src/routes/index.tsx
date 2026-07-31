@@ -26,6 +26,7 @@ import ig2 from "@/assets/ig-2.jpg";
 import ig3 from "@/assets/ig-3.jpg";
 import { SectionHeader } from "@/components/SectionHeader";
 import { Footer } from "@/components/Footer";
+import { CompetitionTeam } from "@/components/CompetitionTeam";
 import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { Seo } from "@/components/Seo";
 import { TechniqueShowcase } from "@/components/TechniqueShowcase";
@@ -595,10 +596,12 @@ function Home() {
         </div>
       </section>
 
+      <CompetitionTeam />
+
       {/* TESTIMONIALS */}
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
         <div className="mb-12 md:mb-16">
-          <div className="eyebrow mb-4">06 — Voices from the Mat</div>
+          <div className="eyebrow mb-4">07 — Voices from the Mat</div>
           <h2 className="font-display text-5xl md:text-7xl">
             Five-Star Reputation
           </h2>
@@ -666,12 +669,12 @@ function Home() {
         </div>
       </section>
 
-      <TechniqueShowcase />
+      <TechniqueShowcase eyebrow="08 — How We Teach" />
 
       {/* FOR YOU */}
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
         <div className="mb-12">
-          <div className="eyebrow mb-4">07 — The Honest Filter</div>
+          <div className="eyebrow mb-4">09 — The Honest Filter</div>
           <h2 className="font-display text-5xl md:text-6xl">
             Is This For You?
           </h2>
@@ -728,7 +731,7 @@ function Home() {
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           <div>
-            <div className="eyebrow mb-4">08 — Questions</div>
+            <div className="eyebrow mb-4">10 — Questions</div>
             <h2 className="font-display text-4xl md:text-5xl">
               Before You Walk In
             </h2>
@@ -770,7 +773,7 @@ function Home() {
         className="border-t border-border px-6 py-20 md:px-12 md:py-32"
       >
         <div className="mb-12">
-          <div className="eyebrow mb-4">09 — Find Us</div>
+          <div className="eyebrow mb-4">11 — Find Us</div>
           <h2 className="font-display text-5xl md:text-6xl">
             The Woodlands Dojo
           </h2>
@@ -849,7 +852,7 @@ function Home() {
       <section className="border-t border-border px-6 py-20 md:px-12 md:py-32">
         <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <div className="eyebrow mb-4">10 — Follow the Academy</div>
+            <div className="eyebrow mb-4">12 — Follow the Academy</div>
             <h2 className="font-display text-5xl md:text-6xl">On The Gram</h2>
             <p className="mt-3 text-sm text-muted-foreground">
               @renzo_gracie_the_woodlands

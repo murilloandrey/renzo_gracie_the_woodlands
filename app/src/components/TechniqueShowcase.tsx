@@ -81,7 +81,7 @@ function TechniqueCard({ technique }: { technique: Technique }) {
 }
 
 export function TechniqueShowcase({
-  eyebrow = "07 — How We Teach",
+  eyebrow = "08 — How We Teach",
 }: {
   eyebrow?: string;
 }) {
