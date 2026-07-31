@@ -49,8 +49,8 @@ function FreeTrial() {
   return (
     <div className="min-h-screen bg-obsidian text-bone">
       <Seo
-        title="Free Trial Class | Renzo Gracie The Woodlands"
-        description="Claim your free first BJJ, Muay Thai, or MMA class at Renzo Gracie The Woodlands. No experience needed."
+        title="3 Free Days | Renzo Gracie The Woodlands"
+        description="Claim three free days of BJJ, Muay Thai, or MMA at Renzo Gracie The Woodlands. No experience needed."
         path="/free-trial"
       />
       <section className="grain relative overflow-hidden px-6 pt-16 pb-20 text-center md:pt-24">
@@ -65,15 +65,15 @@ function FreeTrial() {
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 to-obsidian" />
         <div className="relative mx-auto max-w-2xl">
           <img src={logo} alt="" className="logo-white mx-auto h-14 w-14" />
-          <div className="eyebrow mt-8">Free Trial Class</div>
+          <div className="eyebrow mt-8">Three Free Days</div>
           <h1 className="font-display mt-4 text-5xl md:text-6xl">
             No Experience Needed.
             <br />
-            First Class Free.
+            Train Free for 3 Days.
           </h1>
           <p className="mx-auto mt-6 max-w-md text-sm text-muted-foreground">
             Walk through the door — we'll handle the rest. Fill out the form
-            below and a coach will reach out to schedule your first class.
+            below and a coach will reach out to schedule your three free days.
           </p>
         </div>
       </section>
@@ -88,7 +88,7 @@ function FreeTrial() {
               <h2 className="font-display mt-6 text-4xl">You're In.</h2>
               <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
                 We've received your registration. A coach will reach out shortly
-                to confirm your first class. See you on the mat.
+                to confirm your first training day. See you on the mat.
               </p>
               <Link to="/" className="btn-outline mt-8 inline-flex">
                 Back to Home
@@ -159,7 +159,7 @@ function FreeTrial() {
                 <textarea className="input min-h-[120px]" />
               </Field>
               <button type="submit" className="btn-primary w-full">
-                Claim Your Free Trial <ChevronRight size={16} />
+                Claim Your 3 Free Days <ChevronRight size={16} />
               </button>
             </form>
           )}
@@ -181,7 +181,7 @@ function FreeTrial() {
               {
                 icon: Shirt,
                 t: "No Gear, No Problem",
-                d: "Wear comfortable athletic clothes. A t-shirt and shorts are perfect. No gi needed for your trial.",
+                d: "Wear comfortable athletic clothes. A t-shirt and shorts are perfect. No gi needed for your three free days.",
               },
               {
                 icon: Clock,

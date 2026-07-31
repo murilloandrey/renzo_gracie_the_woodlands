@@ -57,9 +57,9 @@ const DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=9391+Grogans+Mill+Rd+Ste+B12+The+Woodlands+TX";
 const YOUTUBE_URL = "https://www.youtube.com/channel/UCOLzhYYnoYRtR_HPvRLXD3Q";
 const HOME_TITLE =
-  "Jiu Jitsu & MMA in The Woodlands TX | Free Trial | Renzo Gracie The Woodlands";
+  "Jiu Jitsu & MMA in The Woodlands TX | 3 Free Days | Renzo Gracie The Woodlands";
 const HOME_DESCRIPTION =
-  "Train Brazilian Jiu-Jitsu, Muay Thai, MMA, and kids martial arts in The Woodlands, TX. Claim your free trial class at Renzo Gracie The Woodlands.";
+  "Train Brazilian Jiu-Jitsu, Muay Thai, MMA, and kids martial arts in The Woodlands, TX. Claim your three free days at Renzo Gracie The Woodlands.";
 
 const scheduleDays: DayIndex[] = [1, 2, 3, 4, 5, 6];
 const disciplineFilters: Array<{
@@ -229,7 +229,7 @@ const faqs = [
   },
   {
     q: "What should I wear to my first class?",
-    a: "T-shirt and shorts or leggings without zippers. No gi needed for your trial — we'll get you sorted.",
+    a: "T-shirt and shorts or leggings without zippers. No gi needed for your three free days — we'll get you sorted.",
   },
   {
     q: "Is it safe? I'm worried about getting hurt.",
@@ -339,7 +339,7 @@ function Home() {
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/free-trial" className="btn-primary">
-                Claim Your Free Trial Class <ChevronRight size={16} />
+                Claim Your 3 Free Days <ChevronRight size={16} />
               </Link>
               <a
                 href={DIRECTIONS_URL}
@@ -410,7 +410,7 @@ function Home() {
                   </p>
                 )}
                 <span className="mt-6 font-display flex items-center gap-1 text-xs tracking-[0.18em] text-primary">
-                  Start Training <ChevronRight size={14} />
+                  Try 3 Days Free <ChevronRight size={14} />
                 </span>
               </div>
             </Link>
@@ -502,7 +502,7 @@ function Home() {
             today's classes.
           </p>
           <Link to="/free-trial" className="btn-primary">
-            Claim Your Free Trial
+            Claim Your 3 Free Days
           </Link>
         </div>
       </section>
@@ -526,7 +526,7 @@ function Home() {
               the door — our coaches will take it from there.
             </p>
             <Link to="/free-trial" className="btn-primary mt-8">
-              Book Your First Class Free
+              Claim Your 3 Free Days
             </Link>
           </div>
           <div className="space-y-6">
@@ -539,7 +539,7 @@ function Home() {
               {
                 n: "02",
                 t: "No Gear, No Problem",
-                d: "Wear comfortable athletic clothes. A t-shirt and shorts are perfect. No gi needed for your trial.",
+                d: "Wear comfortable athletic clothes. A t-shirt and shorts are perfect. No gi needed for your three free days.",
               },
               {
                 n: "03",
@@ -724,7 +724,7 @@ function Home() {
         </div>
         <div className="mt-12 text-center">
           <Link to="/free-trial" className="btn-primary">
-            Claim Your Free Trial Class
+            Claim Your 3 Free Days
           </Link>
         </div>
       </section>

@@ -10,7 +10,7 @@ export const TEL_URL = `tel:${PHONE_E164}`;
 
 /** Pre-filled text. SMS deep links convert far better than forms for gyms. */
 export const SMS_URL = `sms:${PHONE_E164}?&body=${encodeURIComponent(
-  "Hi! I'd like to book a free trial class.",
+  "Hi! I'd like to claim three free training days.",
 )}`;
 
 export const EMAIL_URL = "mailto:info@renzograciethewoodlands.com";
